@@ -1,0 +1,78 @@
+{
+  "name": "${localWorkspaceFolderBasename}-dev",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {
+      "VARIANT": "bookworm",
+      "PYTHON_VERSION": "3.11",
+      "NODE_VERSION": "20"
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "username": "vscode",
+      "upgradePackages": true
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "${containerBuildArgs:PYTHON_VERSION}",
+      "installJupyterlab": true
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "${containerBuildArgs:NODE_VERSION}"
+    },
+    "ghcr.io/devcontainers/features/git-lfs:1": {}
+  },
+  "updateRemoteUserUID": true,
+  "remoteUser": "vscode",
+  "containerUser": "vscode",
+  "runArgs": [
+    "--init"
+  ],
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
+  "postCreateCommand": "bash .devcontainer/postCreate/bootstrap.sh",
+  "postStartCommand": "git config --global --add safe.directory /workspaces/${localWorkspaceFolderBasename}",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-azuretools.vscode-docker",
+        "esbenp.prettier-vscode",
+        "ms-vscode.makefile-tools"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.analysis.typeCheckingMode": "basic",
+        "python.testing.pytestEnabled": true,
+        "editor.formatOnSave": true,
+        "files.exclude": {
+          "**/__pycache__": true,
+          "**/.pytest_cache": true,
+          "**/.mypy_cache": true
+        }
+      }
+    }
+  },
+  "forwardPorts": [3000, 5000, 8000, 8050, 8501, 8888],
+  "portsAttributes": {
+    "8050": {"label": "Dash"},
+    "8501": {"label": "Streamlit"},
+    "3000": {"label": "Vite/Next"},
+    "8888": {"label": "Jupyter"}
+  },
+  "mounts": [
+    "type=cache,target=/home/vscode/.cache/pip",
+    "type=cache,target=/home/vscode/.cache/pip-tools",
+    "type=cache,target=/home/vscode/.cache/npm"
+  ],
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb"
+  },
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "dev",
+  "shutdownAction": "stopCompose"
+}
