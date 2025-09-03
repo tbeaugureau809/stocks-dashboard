@@ -1,6 +1,10 @@
+Flask
+python-dotenv
+SQLAlchemy
+alembic
+psycopg2-binary
+redis
 yfinance
 pandas
 numpy
 plotly
-dash
-streamlit

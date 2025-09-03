@@ -5,33 +5,32 @@ services:
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
-      args:
-        VARIANT: ${VARIANT:-bookworm}
-        PYTHON_VERSION: ${PYTHON_VERSION:-3.11}
-        NODE_VERSION: ${NODE_VERSION:-20}
-    volumes:
-      - ..:/workspaces/${LOCAL_NAME:-app}:cached
-    env_file:
-      - ../.env.example
     command: sleep infinity
 
-  # postgres:
-  #   image: postgres:16
-  #   restart: unless-stopped
-  #   environment:
-  #     POSTGRES_USER: dev
-  #     POSTGRES_PASSWORD: dev
-  #     POSTGRES_DB: app
-  #   ports:
-  #     - "5432:5432"
-  #   volumes:
-  #     - pgdata:/var/lib/postgresql/data
+    volumes:
+      - ..:/workspaces:cached
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ../.env.example
 
-  # redis:
-  #   image: redis:7
-  #   restart: unless-stopped
-  #   ports:
-  #     - "6379:6379"
+  postgres:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: yfinance_user
+      POSTGRES_PASSWORD: devpassword
+      POSTGRES_DB: stocktrackerdb
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    restart: unless-stopped
+
 
 volumes:
   pgdata:
