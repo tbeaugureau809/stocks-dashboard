@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+    <form method = "POST" action ="{{ url_for('watchlist.add_watchlist') }}">
+                    <input type="text" name = "symbol" id="symbol" pattern="[A-Z]{1,5}" placeholder="Enter Ticker" required >
+                    <button type="submit" name="symbol" id="symbol">Add Ticker</button>
+                </form>
+        <tbody>
+
+
+            {% for sym in symbols %}
+            <tr>
+                <td>{{ sym.symbol }}</td>
+                <td>
+                    <form method = "POST" action="{{ url_for('watchlist.delete_watchlist') }}">
+                        <input type="hidden" name="symbol" value="{{ sym.symbol }}">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+{% endblock %}

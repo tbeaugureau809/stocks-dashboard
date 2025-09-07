@@ -53,8 +53,7 @@ def delete_symbol(symbol: str):
 #Get current watchlist
 def get_watchlist():
     session = SessionLocal()
-    symbols = [row.symbol for row in session.query(Watchlist).all()]
-
+    symbols = session.query(Watchlist).all()
     session.close()
     return symbols
 
