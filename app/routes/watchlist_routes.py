@@ -1,4 +1,4 @@
-from flask import Blueprint,  request, jsonify, render_template, redirect, url_for, flash
+from flask import Blueprint,  request, render_template, redirect, url_for, flash
 from app.services.watchlist_service import add_symbol, delete_symbol, get_watchlist
 
 bp = Blueprint("watchlist", __name__)

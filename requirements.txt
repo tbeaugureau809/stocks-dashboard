@@ -8,3 +8,5 @@ yfinance
 pandas
 numpy
 plotly
+cachetools
+matplotlib

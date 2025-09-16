@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Top Gains</h1>
+    <table class = "table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Latest Price</th>
+                <th>Previous Close</th>
+                <th>% Change</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in movers.top %}
+            <tr>
+                <td>{{ row.symbol}}</td>
+                <td>${{ "%.2f" | format(row.latest) }}</td>
+                <td>${{ "%.2f" | format(row.previous_close) }}</td>
+                <td>{{" %.2f" | format(row.percent_change) }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2>Top Losers</h2>
+    <table class = "table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Latest Price</th>
+                <th>Previous Close</th>
+                <th>% Change</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in movers.bottom %}
+            <td>{{ row.symbol }}</td>
+            <td>${{"%.2f" | format(row.latest) }}</td>
+            <td>${{"%.2f" | format(row.previous_close) }}</td>
+            <td>{{"%.2f" | format(row.percent_change)}}%</td>
+        </tbody>
+            {% endfor %}
+    </table>
+{% endblock %}
