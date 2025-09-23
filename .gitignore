@@ -26,3 +26,5 @@ alembic/versions/__pycache__/
 
 # --- Local scratch/test scripts ---
 quick_test.py
+check_tables.py
+peek_history.py

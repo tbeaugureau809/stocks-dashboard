@@ -14,4 +14,7 @@ def create_app():
     app.register_blueprint(watchlist_bp)
     app.register_blueprint(movers_bp)
 
+
+    from app.services.scheduler_service import start_scheduler
+    start_scheduler()
     return app

@@ -12,7 +12,7 @@ def show_movers():
     try:
         #Currently hardcoded amount of movers to show for dashboard.
         symbols = [ w.symbol for w in db.query(Watchlist).all()]
-        movers = compute_movers(symbols, 2)
+        movers = compute_movers(symbols, 3)
     finally:
         db.close()
 

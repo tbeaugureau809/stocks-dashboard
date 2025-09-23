@@ -1,7 +1,8 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime
+from sqlalchemy import Column, Integer, String, Float, DateTime, Date
 from sqlalchemy.orm import declarative_base
+from app.db import Base
 
-Base = declarative_base()
+
 
 class Watchlist(Base):
     __tablename__ = "watchlist"
@@ -20,3 +21,18 @@ class JobRun(Base):
     id = Column(Integer, primary_key=True, index=True)
     job_name = Column(String, nullable=False)
     run_time = Column(DateTime, nullable=False)
+
+class PriceHistory(Base):
+    __tablename__ = "price_history"
+
+    symbol = Column(String, primary_key=True)
+    date = Column(Date, primary_key=True)
+
+    open = Column(Float)
+    high = Column(Float)
+    low = Column(Float)
+    close = Column(Float)
+    volume = Column(Integer)
+
+
+
