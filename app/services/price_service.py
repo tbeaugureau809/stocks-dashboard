@@ -1,6 +1,7 @@
 import yfinance as yf
 from cachetools import TTLCache, cached
 import time
+from datetime import datetime, timedelta, timezone
 
 latest_cache = TTLCache(maxsize=500, ttl=60)
 prev_cache = TTLCache(maxsize=500, ttl=60)
@@ -19,13 +20,17 @@ def fetch_with_retry(symbol: str, period: str, interval: str, retries=3):
         time.sleep(0.5*(attempt+1))
     return None
 
+
 @cached(latest_cache)
 def latest_price(symbol: str) -> float | None:
 
     data = fetch_with_retry(symbol, period="1d", interval="1m")
     if data is None:
         return None
-    return float(data["Close"].iloc[-1])
+    price = float(data["Close"].iloc[-1])
+    as_of = data.index[-1].to_pydatetime()
+
+    return price, as_of
 
 @cached(prev_cache)
 def previous_close(symbol: str) -> float | None:
@@ -36,7 +41,7 @@ def previous_close(symbol: str) -> float | None:
 
 @cached(change_cache)
 def daily_change(symbol: str) -> dict | None:
-    latest = latest_price(symbol)
+    latest, as_of = latest_price(symbol)
     prev = previous_close(symbol)
 
     if latest is None or prev is None:
@@ -48,6 +53,13 @@ def daily_change(symbol: str) -> dict | None:
         "symbol": symbol,
         "latest": latest,
         "previous_close": prev,
-        "percent_change": round(change, 2)
+        "percent_change": round(change, 2),
+        "last_updated": as_of,
+        "stale": is_stale(as_of)
     }
 
+def is_stale(as_of: datetime, ttl_seconds: int = 300) -> bool:
+    if as_of is None:
+        return True
+    age = datetime.now(timezone.utc) - as_of
+    return age.total_seconds()> ttl_seconds

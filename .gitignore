@@ -28,3 +28,4 @@ alembic/versions/__pycache__/
 quick_test.py
 check_tables.py
 peek_history.py
+sandbox.py
