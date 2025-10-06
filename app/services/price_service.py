@@ -44,7 +44,7 @@ def daily_change(symbol: str) -> dict | None:
     latest, as_of = latest_price(symbol)
     prev = previous_close(symbol)
 
-    if latest is None or prev is None:
+    if latest is None or prev is None or prev == 0:
         return None
 
     change = ((latest-prev)/prev)*100
