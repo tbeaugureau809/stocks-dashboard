@@ -1,0 +1,89 @@
+body {
+  background-color: #f4f6f8;
+}
+table {
+  margin-top: 50px
+  margin-left 2px
+
+}
+
+tbody {
+    background-color:#f4f6f8;
+}
+
+.navbar {
+  background: rgb(0, 0, 120);
+  font-family: Merriweather;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.navdiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+.logo {
+  font-family: Merriweather;
+  font-size: 35px;
+  color: white;
+  font-weight: 600x;
+  margin-left: 15px;
+
+}
+
+.nav-links li {
+  display: inline-block;
+  list-style: none;
+
+
+}
+
+.nav-links li a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  font-size: 22px;
+
+  margin-right: 25px;
+  margin-top: 20px;
+}
+
+.addtick{
+  margin: 10px;
+  border-radius: 3px
+}
+
+.chart-container{
+  margin: 20px auto;
+  padding: 15px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: black;
+  width: fit-content;
+  text-align: center;
+}
+
+.container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+  font-weight: 600;
+  color: #212529;
+}
+
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+
+.btn-danger {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}

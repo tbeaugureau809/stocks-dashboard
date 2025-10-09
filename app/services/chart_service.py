@@ -1,5 +1,6 @@
-from indicators_service import get_history_with_sma, get_fast_info
+from app.services.indicators_service import get_history_with_sma, get_fast_info
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 def plot_history_with_sma(df, symbol:str):
 
@@ -15,9 +16,12 @@ def plot_history_with_sma(df, symbol:str):
     plt.legend()
     plt.tight_layout()
 
-    plt.savefig("chart.png")
-    print("Chart saved to chart.png")
-    plt.show()
+    path = Path("app/static") / f"{symbol}_chart.png"
+    plt.savefig(path)
+    plt.close()
+    return f"{symbol}_chart.png"
+
+
 
 def main():
     df = get_history_with_sma("AAPL")

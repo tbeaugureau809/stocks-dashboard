@@ -1,4 +1,4 @@
-from price_service import fetch_with_retry
+from app.services.price_service import fetch_with_retry
 import yfinance as yf
 
 def symbol_history(symbol: str, interval: str, days: int = 20, retries=3):

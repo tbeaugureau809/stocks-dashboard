@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if error %}
+    <div class="alert alert-danger" role = "alert">
+        {{ error }}
+    </div>
+
+
+
+    {% endif %}
+    <div class="chart-container">
+        <img src="{{ url_for('static', filename=image) }}" alt="{{ symbol }} chart">
+
+    </div>
+{% endblock %}
