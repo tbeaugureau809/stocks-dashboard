@@ -1,7 +1,7 @@
 import yfinance as yf
 from cachetools import TTLCache, cached
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 latest_cache = TTLCache(maxsize=500, ttl=60)
 prev_cache = TTLCache(maxsize=500, ttl=60)

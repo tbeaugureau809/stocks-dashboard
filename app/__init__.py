@@ -20,4 +20,5 @@ def create_app():
     if not app.config.get("TESTING", False):
         from app.services.scheduler_service import start_scheduler
         start_scheduler()
-        return app
+
+    return app

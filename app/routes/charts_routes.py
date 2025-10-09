@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 from app.services.chart_service import plot_history_with_sma
-from app.services.indicators_service import get_history_with_sma, get_fast_info
+from app.services.indicators_service import get_history_with_sma
 
 
 bp = Blueprint("charts", __name__)
