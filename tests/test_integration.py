@@ -8,8 +8,8 @@ def test_healthcheck(client):
 
 def test_homepage(client):
     response = client.get("/")
-    assert response.status_code == 200
-    assert b"<html" in response.data
+    assert response.status_code == 302
+    assert response.headers["Location"].endswith("/watchlist")
 
 def test_watchlist_add(client):
     response = client.post(
