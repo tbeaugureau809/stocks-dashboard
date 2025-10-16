@@ -7,6 +7,7 @@ class Watchlist(Base):
     __tablename__ = "watchlist"
     id = Column(Integer, primary_key=True, index=True)
     symbol = Column(String, nullable=False, unique=True)
+    price = Column(Float, nullable = True)
 
 class Price(Base):
     __tablename__ = "prices"

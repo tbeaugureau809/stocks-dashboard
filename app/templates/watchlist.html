@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form method= "POST" class=action ="{{ url_for('watchlist.add_watchlist') }}">
+    <form method= "POST" action ="{{ url_for('watchlist.add_watchlist') }}">
                         <input type="text" class="addtick" name = "symbol" id="symbol" pattern="[A-Z]{1,5}" placeholder="Enter Ticker" required >
                         <button type="submit" class="addtick" style="margin: 3px" name="symbol" id="symbol">Add Ticker</button>
                 </form>
@@ -12,6 +12,7 @@
                 <tr>
                     <th>Row</th>
                     <th>Symbol</th>
+                    <th>Latest Price</th>
                     <th colspan="2">Actions</th>
 
                 </tr>
@@ -21,6 +22,7 @@
                 <tr>
                     <td>{{ loop.index }}</td>
                     <td>{{ sym.symbol }}</td>
+                    <td>${{ "%.2f"|format(sym.price or 0) }}</td>
                     <td>
                         <form method = "POST" action="{{ url_for('watchlist.delete_watchlist') }}" class="d-inline">
                             <input type="hidden" name="symbol" value="{{ sym.symbol }}">

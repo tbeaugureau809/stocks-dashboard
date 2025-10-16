@@ -24,6 +24,7 @@ Other Tools: python-dotenv for environment configuration
 - Search bar for watchlist.
 - Additional information such as industry and allow filtering.
 - Have # of movers be editable as only the top 3 movers are shown for the respective category.
+- Top Movers has no logic accounting for the watchlist being small and therefore can lump into both tables if less than 6 stocks.
 
 ## Setup and installation
 Development with Docker

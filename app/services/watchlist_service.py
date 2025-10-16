@@ -1,7 +1,7 @@
 import yfinance as yf
 from app.db import SessionLocal
-from app.models import Watchlist
-
+from app.models import Watchlist, Price
+from app.services.price_service import latest_price
 
 
 #Validate whether ticker exists
@@ -26,6 +26,7 @@ def add_symbol(symbol: str):
             return{"error": f"{symbol} has already been added"}
 
         new_symbol = Watchlist(symbol=symbol)
+
         session.add(new_symbol)
         session.commit()
         return {"message": f"{symbol} added to watchlist"}
